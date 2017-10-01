@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.kubernetes.discovery.KubernetesDiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,7 +28,7 @@ public class HelloController {
     }
     
     @Autowired
-    private DiscoveryClient discoveryClient;
+    private KubernetesDiscoveryClient discoveryClient;
     
     @RequestMapping("/url/{host}/{port}")
     public String url(@PathVariable("host") String host, @PathVariable("port")
@@ -56,6 +57,7 @@ public class HelloController {
     @RequestMapping("/services")
     public List<String> services()
     {
+    	
     	List<String> services = discoveryClient.getServices();
     	return services;
     }
