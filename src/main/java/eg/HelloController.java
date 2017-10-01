@@ -28,7 +28,7 @@ public class HelloController {
     }
     
     @Autowired
-    private KubernetesDiscoveryClient discoveryClient;
+    private DiscoveryClient discoveryClient;
     
     @RequestMapping("/url/{host}/{port}")
     public String url(@PathVariable("host") String host, @PathVariable("port")

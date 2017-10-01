@@ -5,11 +5,20 @@ import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.kubernetes.KubernetesAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+
+import io.fabric8.kubernetes.client.Config;
 
 @SpringBootApplication
+@EnableDiscoveryClient
+@Import(KubernetesAutoConfiguration.class)
 public class EgApplication {
+	
+	
 
     public static void main(String[] args) {
         SpringApplication.run(EgApplication.class, args);
