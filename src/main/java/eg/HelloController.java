@@ -11,7 +11,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,6 +25,9 @@ public class HelloController {
     public String index() {
         return "Greetings from Spring Boot!";
     }
+    
+    @Autowired
+    private DiscoveryClient discoveryClient;
     
     @RequestMapping("/url/{host}/{port}")
     public String url(@PathVariable("host") String host, @PathVariable("port")
@@ -45,5 +51,12 @@ public class HelloController {
     	}
     	pw.flush();
         return sw.getBuffer().toString();
+    }
+    
+    @RequestMapping("/services")
+    public List<String> services()
+    {
+    	List<String> services = discoveryClient.getServices();
+    	return services;
     }
 }
